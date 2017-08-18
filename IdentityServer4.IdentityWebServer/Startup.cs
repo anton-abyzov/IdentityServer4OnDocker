@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace IdentityServer4.IdentityWebServer
 {
@@ -66,6 +67,23 @@ namespace IdentityServer4.IdentityWebServer
 
                 ClientId = "106186874633-obrbrvr3lrq5l0o4n71ohc972bl9of68.apps.googleusercontent.com",
                 ClientSecret = "BdGLmechIJFL1IpmMSw_BTn2"
+            });
+
+            // middleware for external openid connect authentication
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                SignOutScheme = IdentityServerConstants.SignoutScheme,
+
+                DisplayName = "OpenID Connect",
+                Authority = "https://demo.identityserver.io/",
+                ClientId = "implicit",
+
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "role"
+                }
             });
 
             app.UseStaticFiles();
