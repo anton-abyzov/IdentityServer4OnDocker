@@ -17,15 +17,15 @@ namespace IdentityServer4Client
 
         private static async Task MainAsync()
         {
-            var authority = "http://localhost:5050";
+            var authority = "http://localhost:5060";
             var discovery = new DiscoveryClient(authority);
 
             var disco = await discovery.GetAsync();
 
-            var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "topsecret");
-            //var tokenClient = new TokenClient(disco.TokenEndpoint, "clientmvc", "topsecret");
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "api1");
-            //var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
+            //var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "topsecret");
+            var tokenClient = new TokenClient(disco.TokenEndpoint, "clientmvc", "topsecret");
+            //var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "api1");
+            var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
 
             if (tokenResponse.IsError)
             {

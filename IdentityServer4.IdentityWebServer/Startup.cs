@@ -58,6 +58,16 @@ namespace IdentityServer4.IdentityWebServer
 
             app.UseIdentityServer();
 
+            app.UseGoogleAuthentication(new GoogleOptions
+            {
+                AuthenticationScheme = "Google",
+                DisplayName = "Google",
+                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+
+                ClientId = "106186874633-obrbrvr3lrq5l0o4n71ohc972bl9of68.apps.googleusercontent.com",
+                ClientSecret = "BdGLmechIJFL1IpmMSw_BTn2"
+            });
+
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
