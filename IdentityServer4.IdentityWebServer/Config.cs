@@ -40,19 +40,39 @@ namespace IdentityServer4.IdentityWebServer
                 },
                 AllowedScopes = {"api1"}
             },
+            //new Client()
+            //{
+            //    ClientId = "mvc",
+            //    ClientUri = "mvc app",
+            //    AllowedGrantTypes = GrantTypes.Implicit,
+            //    RedirectUris = {_mvcUrl + "/signin-oidc"},
+            //    PostLogoutRedirectUris = {_mvcUrl + "/signout-callback-oidc"},
+
+            //    AllowedScopes = new List<string>()
+            //    {
+            //        IdentityServerConstants.StandardScopes.OpenId,
+            //        IdentityServerConstants.StandardScopes.Profile
+            //    }
+            //}
             new Client()
             {
                 ClientId = "mvc",
                 ClientUri = "mvc app",
-                AllowedGrantTypes = GrantTypes.Implicit,
+                AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+                ClientSecrets =
+                {
+                    new Secret("topsecret".Sha256())
+                },
                 RedirectUris = {_mvcUrl + "/signin-oidc"},
                 PostLogoutRedirectUris = {_mvcUrl + "/signout-callback-oidc"},
 
                 AllowedScopes = new List<string>()
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile
-                }
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "api1"
+                },
+                AllowOfflineAccess = true
             }
         };
 

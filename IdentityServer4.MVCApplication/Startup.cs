@@ -30,6 +30,8 @@ namespace IdentityServer4.MVCApplication
         {
             // Add framework services.
             services.AddMvc();
+
+            services.Configure<AppSettings>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,15 +59,32 @@ namespace IdentityServer4.MVCApplication
 
             var identityUrl = Configuration.GetValue<string>("IdentityUrl");
 
-            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions()
+            //app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions()
+            //{
+            //    AuthenticationScheme = "oidc",
+            //    SignInScheme = "Cookies",
+            //    Authority = identityUrl,
+            //    RequireHttpsMetadata = false,
+
+            //    ClientId = "mvc",
+            //    SaveTokens = true
+            //});
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
                 SignInScheme = "Cookies",
-                //Authority = Environment.GetEnvironmentVariable("http://localhost:5060"),
+
                 Authority = identityUrl,
                 RequireHttpsMetadata = false,
 
                 ClientId = "mvc",
+                ClientSecret = "topsecret",
+
+                ResponseType = "code id_token",
+                Scope = { "api1", "offline_access" },
+
+                GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true
             });
 

@@ -19,6 +19,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - IdentityUrl=http://54.93.170.195:5060
+      - ApiService=http://54.93.170.195:5077
     ports:
       - "5052:80"
     
