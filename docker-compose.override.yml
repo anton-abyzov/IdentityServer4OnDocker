@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  identityserver4.identitywebserver:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MvcAppUrl=http://localhost:5052
+    ports:
+      - "5060:80"
+
+  identityserver4api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityUrl=http://10.0.75.1:5060
+    ports:
+      - "5077:80"
+
+  identityserver4.mvcapplication:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - IdentityUrl=http://10.0.75.1:5060
+    ports:
+      - "5052:80"

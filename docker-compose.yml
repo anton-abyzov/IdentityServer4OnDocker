@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  identityserver4.identitywebserver:
+    image: identityserver4.identitywebserver
+    build:
+      context: ./IdentityServer4.IdentityWebServer
+      dockerfile: Dockerfile
+
+  identityserver4api:
+    image: identityserver4api
+    build:
+      context: ./IdentityServer4Api
+      dockerfile: Dockerfile
+
+  identityserver4.mvcapplication:
+    image: identityserver4.mvcapplication
+    build:
+      context: ./IdentityServer4.MVCApplication
+      dockerfile: Dockerfile
+   
