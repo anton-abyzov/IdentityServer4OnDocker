@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -50,7 +52,7 @@ namespace IdentityServer4.MVCApplication
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
@@ -81,11 +83,40 @@ namespace IdentityServer4.MVCApplication
                 ClientId = "mvc",
                 ClientSecret = "topsecret",
 
+                //SignedOutCallbackPath = new PathString(""),
+
                 ResponseType = "code id_token",
                 Scope = { "api1", "offline_access" },
 
                 GetClaimsFromUserInfoEndpoint = true,
-                SaveTokens = true
+                SaveTokens = true,
+                Events = new OpenIdConnectEvents()
+                {
+                    OnAuthorizationCodeReceived = context =>
+                    {
+                        return Task.FromResult(0);
+                    },
+
+                    OnTicketReceived = context =>
+                    {
+                        return Task.FromResult(0);
+                    },
+
+                    OnAuthenticationFailed = context =>
+                    {
+                        return Task.FromResult(0);
+                    },
+
+                    OnTokenValidated = TokenValidatedContext =>
+                    {
+                        return Task.FromResult(0);
+                    },
+
+                    OnUserInformationReceived = UserInformationReceivedContext =>
+                    {
+                        return Task.FromResult(0);
+                    }
+                }
             });
 
             app.UseStaticFiles();

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json.Linq;
 
 namespace IdentityServer4.MVCApplication.Controllers
@@ -17,8 +18,8 @@ namespace IdentityServer4.MVCApplication.Controllers
             _settings = settings.Value;
         }
 
-        [HttpGet]
-        [Authorize]
+        //[HttpGet]
+        //[Authorize]
         public IActionResult Index()
         {
             return View();
@@ -37,7 +38,8 @@ namespace IdentityServer4.MVCApplication.Controllers
         {
             var apiService = _settings.ApiService;
 
-            var accessToken = await HttpContext.Authentication.GetTokenAsync("access_token");
+            //var accessToken = await HttpContext.Authentication.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+            var accessToken = await HttpContext.Authentication.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
 
             var client = new HttpClient();
             client.SetBearerToken(accessToken);
@@ -46,6 +48,14 @@ namespace IdentityServer4.MVCApplication.Controllers
             ViewBag.Json = JArray.Parse(content).ToString();
             return View("json");
         }
-      
+
+        [Authorize]
+        public IActionResult Secure()
+        {
+            ViewData["Message"] = "Secure page.";
+
+            return View();
+        }
+
     }
 }
