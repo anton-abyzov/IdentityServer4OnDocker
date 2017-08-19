@@ -4,12 +4,12 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace AspnetIdentityProject.Quickstart.Account
+namespace IdentityServer4.Quickstart.UI
 {
     public class LoginInputModel
     {
         [Required]
-        public string Username { get; set; }
+        public string Email { get; set; }
         [Required]
         public string Password { get; set; }
         public bool RememberLogin { get; set; }

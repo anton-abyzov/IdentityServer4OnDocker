@@ -8,8 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using AspnetIdentityProject.Models;
-using AspnetIdentityProject.Models.ManageViewModels;
-using AspnetIdentityProject.Services;
+using IdentityServerWithAspNetIdentity.Models;
+using IdentityServerWithAspNetIdentity.Models.ManageViewModels;
+using IdentityServerWithAspNetIdentity.Services;
 
 namespace AspnetIdentityProject.Controllers
 {

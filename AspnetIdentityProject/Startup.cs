@@ -11,8 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AspnetIdentityProject.Data;
 using AspnetIdentityProject.Models;
-using AspnetIdentityProject.Services;
 using IdentityServer4.IdentityWebServer;
+using IdentityServerWithAspNetIdentity.Models;
+using IdentityServerWithAspNetIdentity.Services;
 
 namespace AspnetIdentityProject
 {
