@@ -58,7 +58,8 @@ namespace IdentityServer4.MVCApplication
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
             {
-                AuthenticationScheme = "Cookies"
+                AuthenticationScheme = "Cookies",
+                AccessDeniedPath = "/Authorization/AccessDenied"
             });
 
             var identityUrl = Configuration.GetValue<string>("IdentityUrl");

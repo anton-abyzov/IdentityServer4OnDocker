@@ -60,7 +60,15 @@ namespace IdentityServer4.IdentityWebServer
                 ClientUri = "mvc app",
                 AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
+                //IdentityTokenLifetime = 300,
                 //AlwaysIncludeUserClaimsInIdToken = true,
+                //AuthorizationCodeLifetime =  300,
+                AccessTokenLifetime = 120,
+                //AbsoluteRefreshTokenLifetime = 
+                //RefreshTokenExpiration = TokenExpiration.Sliding,
+                //SlidingRefreshTokenLifetime = ...
+
+                UpdateAccessTokenClaimsOnRefresh = true,
 
                 RequireConsent = true,
                 
