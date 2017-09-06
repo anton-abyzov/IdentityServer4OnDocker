@@ -39,8 +39,9 @@ namespace IdentityServer4Client
             var myProxy = new HttpClientHandler()
             {
                 UseProxy = true,
-                Proxy = new WebProxy("http://127.0.0.1:8888")
+                //Proxy = new WebProxy("http://127.0.0.1:8888")
                 //Proxy = new MyProxy("http://localhost:8888")
+                Proxy = new MyProxy("http://DESKTOP-A8DCCM6:8888")
             };
             //var client = new HttpClient();
             var client = new HttpClient(myProxy);
